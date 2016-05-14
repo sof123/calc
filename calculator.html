@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<textarea id = "input" readonly></textarea>
+
+<table style="width:10%">
+
+  <tr>
+    
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+  </tr>
+  <tr>
+    <td><button id="one" onclick = "updateScreen(1)" type="button">1</button></td>
+    <td><button id = "two" onclick = "updateScreen(2)" type="button">2</button></td> 
+    <td><button id = "three" onclick = "updateScreen(3)" type="button">3</button></td>
+	<td><button id = "plus" onclick = "updateScreen('+')" type="button">+</button></td>
+	<td><button id = "times" onclick = "updateScreen('*')" type="button">*</button></td>
+	<td><button id="c" onclick = "updateScreen('c')" type="button">c</button></td>
+  </tr>
+  <tr>
+    <td style="width:25%"><button id = "four" onclick = "updateScreen(4)" type="button">4</button></td>
+    <td><button id = "five" onclick = "updateScreen(5)" type="button">5</button></td> 
+    <td><button id = "six" onclick = "updateScreen(6)" type="button">6</button></td>
+	<td><button id = "minus" onclick = "updateScreen('-')" type="button">-</button></td>
+	<td><button id = "by" onclick = "updateScreen('/')" type="button">/</button></td>
+  </tr>
+  <tr>
+    <td><button id = "seven" onclick = "updateScreen(7)" type="button">7</button></td>
+    <td><button id = "eight" onclick = "updateScreen(8)" type="button">8</button></td> 
+    <td><button id = "nine" onclick = "updateScreen(9)" type="button">9</button></td>
+	<td><button id = "period" onclick = "updateScreen('.')" type="button">.</button></td>
+	<td><button id = "equals" onclick = "updateScreen('=')" type="button">=</button></td>
+  </tr>
+</table>
+
+
+<script>
+var currentText = "";
+var afterEqual = 0;
+function updateScreen(number)
+{
+	if (number !== "=" && number != 'c')
+	{
+		if (afterEqual === 1)
+		{
+			currentText = "";
+			document.getElementById("input").innerHTML = "";
+		}
+		currentText+=number;
+		document.getElementById("input").innerHTML+= number;
+		afterEqual = 0;
+	}
+	//on equals sign
+	else if (number === "=" )
+	{
+		document.getElementById("input").innerHTML = (Function('return ' + currentText + ';'))();
+		afterEqual = 1;
+	}
+	else if (number === "c")
+	{
+		currentText = "";
+		document.getElementById("input").innerHTML = "";
+		afterEqual = 0;
+		
+	}
+}
+</script>
+
+</html>
